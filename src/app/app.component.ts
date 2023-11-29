@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ContentChildren, QueryList, AfterContentInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {FoodsComponent} from "./foods/foods.component";
@@ -11,10 +11,16 @@ import {FoodComponent} from "./food/food.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements AfterContentInit {
   title = 'ngOnContentInit';
 
+  @ContentChildren(FoodComponent) foodChildren!: QueryList<FoodComponent>
+
   foods = ['bánh mình', 'trứng gà', 'gạo', 'nước ép']
+
+  ngAfterContentInit() {
+    console.log(this.foodChildren)
+  }
 
 
 }
