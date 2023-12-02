@@ -1,4 +1,4 @@
-import {Component, ContentChild, AfterContentInit, ContentChildren, QueryList} from '@angular/core';
+import {Component, ContentChild, AfterContentInit, AfterContentChecked, ContentChildren, QueryList} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FoodComponent} from "../food/food.component";
 
@@ -9,7 +9,7 @@ import {FoodComponent} from "../food/food.component";
   templateUrl: './foods.component.html',
   styleUrl: './foods.component.css'
 })
-export class FoodsComponent implements AfterContentInit {
+export class FoodsComponent implements AfterContentInit, AfterContentChecked {
 
   @ContentChild(FoodComponent) foodCmp!: FoodComponent
 
@@ -20,9 +20,13 @@ export class FoodsComponent implements AfterContentInit {
 
     this.foodChildren.map((item) => {
       if (item.food == 'gạo today') {
-        console.log(item)
+        item.food = 'gạo thay đổi today'
       }
     })
+  }
+
+  ngAfterContentChecked() {
+    console.log('s')
   }
 
 }
